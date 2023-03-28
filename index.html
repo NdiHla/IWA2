@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tally Count</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"crossorigin> 
+    <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Overpass:wght@900&family=Robotp:wght@500;900&display=swap" rel="stylesheet">   
+    
+<style>
+    :root {
+    --color-green: #31c48d; 
+    --color-white: #ffffff;
+    --color-dark-gray: #33333d;
+    --color-medium-grey: #424250;
+    --color-light-grey: #9aa3b2;  
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    background: var(--color-medium-grey);
+    color: var(--color-white);
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* header */
+
+.header {
+    text-align: center;
+}
+
+.header_title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-light-grey);
+}
+
+/* controls */
+
+.controls {
+    background: yellow;
+}
+
+/* counter */
+
+.counter {
+    background: var(--color-dark-gray);
+}
+
+.counter__value {
+    width: 100%;
+    height: 15rem;
+    text-align: center;
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--color-white);
+    background: none;
+    border-width: 0;
+    border-bottom: var(--color-light-grey);
+}
+
+.counter__actions {
+    display: flex;
+}
+
+.counter__buttons {
+    background: none;
+    width: 50%;
+    border-width: 0;
+    color: var(--color-light-grey);
+    font-size: 3rem;
+    height: 10rem;
+    border-bottom: 1px solid var(--color-light-grey);
+    transition: transform 0.1s;
+    transform: translateY(0);
+}
+
+.counter__buttons:disabled {
+    opacity: 0.2;
+}
+
+.counter__buttons:active {
+    background: var(--color-medium-grey);
+    transform: translateY(2%);
+}
+
+.counter__buttons_first {
+    border-right: 1px solid var(--color-light-grey);
+}
+
+/* footer */
+
+.footer {
+    background: var(--color-dark-gray);
+    color: var(--color-light-grey);
+    padding: 2rem;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.footer_link {
+    color: var(--color-white);
+}
+</style>
+<script>
+    const MAX_NUMBER = 15
+const MIN_NUMBER = -5
+const STEP_AMOUNT =5;
+
+const number = document.querySelector('[data-key="number"]')
+const subtract = document.querySelector('[data-key="subtract"]')
+const add = document.querySelector('[data-key="add"]')
+
+const subtractHandler = () => {
+const newValue = parseInt(number.value) - 1
+number.value = number.value
+
+if (subtract.disabled === true) {
+    subtract.disabled = false
+} 
+
+if (newValue <= MIN_NUMBER) {
+    subtract.disabled = true
+} 
+}
+
+const addHandler = () => {
+    const newValue = parseInt(number.value) + 1
+    number.value = number.value + 1;
+
+if (subtract.disabled === true) {
+    subtract.disabled = false
+} 
+
+if (newValue >= MAX_NUMBER) {
+    add.disabled =true
+} 
+}
+
+
+subtract.addEventListener('click', subtractHandler)
+add.addEventListener('click', addHandler)
+
+
+
+
+
+
+
+
+
+<script src="/scripts.js" defer></script>
+</head>
+    <body>
+        <header class="header">
+            <h1 class="header_title">
+                Tally Count
+            </h1>
+        </header>
+
+        <aside class="controls">
+            <label>
+                <span>Display</span>
+                    <select>
+                        <option>Single</option>
+                        <option>Multiple</option>
+                    </select>
+            </label>
+
+            <label>
+                <span>Counter</span>
+                    <select>
+                        <option>Counter 1</option>
+                        <option>Counter 2</option>
+                        <option>Counter 3</option>
+                    </select>
+            </label>
+
+            <button>Settings</button>
+        </aside>
+
+        <main class="Counter">
+            <input class="counter__value" data-key="number" readonly="0">
+            <div class="counter__actions">
+            <button data-key="subtract" class="counter__button_first">-</button>
+            <button data-key="add" class="counter__button">+</button>
+            </div>
+        </main>
+        <footer class="footer">
+            Inspired by <a class="footer_link" href="https://tallycount.app/">Tally Count</a>. Note that this is merely a student practice project for learning JavaScript.
+        </footer>
+    </body>
+    </html>
